@@ -130,8 +130,7 @@ Column(
 
 Here's how the Q&A Widget looks in action:
 
-![Q&A Widget Example](example\image.png)
-*(Please upload the `image_5e407b.png` screenshot to your GitHub repository, for example, in an `images/` folder, and update the path above if necessary.)*
+![Q&A Widget Example](https://github.com/yemreeee/q_and_a_widget/blob/main/example/image.png)
 
 ## JSON Output Format
 
@@ -151,8 +150,8 @@ This output is designed to be easily parsed and stored in a database.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to open an issue or submit a pull request on the [GitHub repository](https://www.google.com/search?q=https://github.com/your_username/q_and_a_widget).
+Contributions are welcome! Please feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/yemreeee/q_and_a_widget).
 
 ## License
 
-This package is distributed under the [MIT License](https://www.google.com/search?q=LICENSE).
+This package is distributed under the [MIT License](https://github.com/yemreeee/q_and_a_widget/blob/main/LICENSE).
