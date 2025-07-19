@@ -1,39 +1,135 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+Q&A Widget
+A Flutter package for displaying questions with multiple-choice radio button options, designed with the MVVM (Model-View-ViewModel) architecture in mind. This package provides a reusable QuestionWidget and a QuestionViewModel to manage your question data and user selections, making your UI logic clean and testable.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Features
+MVVM Architecture: Separates UI, UI logic, and data for better maintainability and testability.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+Dynamic Question Display: Easily display a list of questions with their respective radio button choices.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+JSON Output: Provides a JSON output to the debug console for each selected answer, including the question ID and text, suitable for database storage.
 
-## Features
+Customizable Questions: Use your own list of QuestionChoices objects to populate the widgets.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Installation
+Add this to your pubspec.yaml file:
 
-## Getting started
+dependencies:
+  q_and_a_widget: ^0.0.1 # Replace with the latest version
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Then, run flutter pub get in your project's root directory.
 
-## Usage
+How to Use
+1. Define Your Questions
+Your questions should be represented by the QuestionChoices model provided by the package.
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+import 'package:q_and_a_widget/q_and_a_widget.dart';
 
-```dart
-const like = 'sample';
-```
+final List<QuestionChoices> myQuestions = const [
+  QuestionChoices(
+    'q1', // Unique ID for the question
+    'What is the capital of France?',
+    ['Berlin', 'Madrid', 'Paris', 'Rome'],
+  ),
+  QuestionChoices(
+    'q2', // Unique ID for the question
+    'Which planet is closest to the Sun?',
+    ['Earth', 'Mars', 'Mercury', 'Venus'],
+  ),
+  // Add more questions as needed
+];
 
-## Additional information
+2. Initialize the ViewModel
+In your StatefulWidget's initState method, create an instance of QuestionViewModel, optionally passing your custom list of questions.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+import 'package:flutter/material.dart';
+import 'package:q_and_a_widget/q_and_a_widget.dart';
+
+class MyQuizPage extends StatefulWidget {
+  const MyQuizPage({Key? key}) : super(key: key);
+
+  @override
+  State<MyQuizPage> createState() => _MyQuizPageState();
+}
+
+class _MyQuizPageState extends State<MyQuizPage> {
+  final List<QuestionChoices> _myCustomQuestions = const [
+    QuestionChoices('c1', 'What is the largest animal on Earth?', ['Elephant', 'Blue Whale', 'Giraffe', 'Great White Shark']),
+    QuestionChoices('c2', 'Which gas do plants absorb from the atmosphere?', ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen']),
+  ];
+
+  late final QuestionViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = QuestionViewModel(questions: _myCustomQuestions); // Pass your custom questions
+    // If you want to use the default dummy questions, simply do:
+    // _viewModel = QuestionViewModel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // ... your UI code ...
+    return Scaffold(
+      appBar: AppBar(title: const Text('My Quiz')),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Loop through questions from the ViewModel
+            ..._viewModel.questions.map<Widget>((questionData) {
+              return QuestionWidget(
+                questionData: questionData,
+                onChoiceSelected: _viewModel.handleChoiceSelected,
+              );
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+3. Display the Widgets
+Use the QuestionWidget within your Flutter UI, passing the QuestionChoices object and the handleChoiceSelected callback from your ViewModel.
+
+// Inside your build method, after initializing _viewModel:
+
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    ..._viewModel.questions.map<Widget>((questionData) {
+      return Column(
+        children: [
+          QuestionWidget(
+            questionData: questionData,
+            onChoiceSelected: _viewModel.handleChoiceSelected,
+          ),
+          const SizedBox(height: 30), // Space between widgets
+        ],
+      );
+    }).toList(),
+  ],
+)
+
+Preview
+Here's how the Q&A Widget looks in action:
+![Q&A Widget Preview](image.png)
+
+JSON Output Format
+When a user selects an answer, the handleChoiceSelected method in QuestionViewModel will print a JSON object to the debug console (e.g., in VS Code's Debug Console or your terminal where flutter run is executing).
+
+Example JSON output for a single selection:
+
+{
+  "question_id": "c1",
+  "question_text": "What is the largest animal on Earth?",
+  "selected_answer": "Blue Whale"
+}
+
+This output is designed to be easily parsed and stored in a database.
+
+Contributing
+Contributions are welcome! Please feel free to open an issue or submit a pull request on the GitHub repository.
+
+License
+This package is distributed under the MIT License. See the LICENSE file for more details.
