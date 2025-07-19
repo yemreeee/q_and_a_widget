@@ -134,16 +134,23 @@ Here's how the Q&A Widget looks in action:
 
 ## JSON Output Format
 
-When a user selects an answer, the `handleChoiceSelected` method in `QuestionViewModel` will print a JSON object to the debug console (e.g., in VS Code's Debug Console or your terminal where `flutter run` is executing).
+When a user selects an answer, the `handleChoiceSelected` method in `QuestionViewModel` will print a JSON object representing *all currently selected answers* as a list to the debug console (e.g., in VS Code's Debug Console or your terminal where `flutter run` is executing).
 
-Example JSON output for a single selection:
+Example JSON output for multiple selections:
 
 ```json
-{
-  "question_id": "c1",
-  "question_text": "What is the largest animal on Earth?",
-  "selected_answer": "Blue Whale"
-}
+[
+  {
+    "question_id": "c1",
+    "question_text": "What is the largest animal on Earth?",
+    "selected_answer": "Blue Whale"
+  },
+  {
+    "question_id": "c2",
+    "question_text": "Which gas do plants absorb from the atmosphere?",
+    "selected_answer": "Carbon Dioxide"
+  }
+]
 ```
 
 This output is designed to be easily parsed and stored in a database.
