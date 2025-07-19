@@ -1,27 +1,35 @@
-Q&A Widget
-A Flutter package for displaying questions with multiple-choice radio button options, designed with the MVVM (Model-View-ViewModel) architecture in mind. This package provides a reusable QuestionWidget and a QuestionViewModel to manage your question data and user selections, making your UI logic clean and testable.
+# Q&A Widget
 
-Features
-MVVM Architecture: Separates UI, UI logic, and data for better maintainability and testability.
+A Flutter package for displaying questions with multiple-choice radio button options, designed with the MVVM (Model-View-ViewModel) architecture in mind. This package provides a reusable `QuestionWidget` and a `QuestionViewModel` to manage your question data and user selections, making your UI logic clean and testable.
 
-Dynamic Question Display: Easily display a list of questions with their respective radio button choices.
+## Features
 
-JSON Output: Provides a JSON output to the debug console for each selected answer, including the question ID and text, suitable for database storage.
+* **MVVM Architecture:** Separates UI, UI logic, and data for better maintainability and testability.
 
-Customizable Questions: Use your own list of QuestionChoices objects to populate the widgets.
+* **Dynamic Question Display:** Easily display a list of questions with their respective radio button choices.
 
-Installation
-Add this to your pubspec.yaml file:
+* **JSON Output:** Provides a JSON output to the debug console for each selected answer, including the question ID and text, suitable for database storage.
 
+* **Customizable Questions:** Use your own list of `QuestionChoices` objects to populate the widgets.
+
+## Installation
+
+Add this to your `pubspec.yaml` file:
+
+```yaml
 dependencies:
   q_and_a_widget: ^0.0.1 # Replace with the latest version
+```
 
-Then, run flutter pub get in your project's root directory.
+Then, run `flutter pub get` in your project's root directory.
 
-How to Use
-1. Define Your Questions
-Your questions should be represented by the QuestionChoices model provided by the package.
+## How to Use
 
+### 1. Define Your Questions
+
+Your questions should be represented by the `QuestionChoices` model provided by the package.
+
+```dart
 import 'package:q_and_a_widget/q_and_a_widget.dart';
 
 final List<QuestionChoices> myQuestions = const [
@@ -37,10 +45,13 @@ final List<QuestionChoices> myQuestions = const [
   ),
   // Add more questions as needed
 ];
+```
 
-2. Initialize the ViewModel
-In your StatefulWidget's initState method, create an instance of QuestionViewModel, optionally passing your custom list of questions.
+### 2. Initialize the ViewModel
 
+In your StatefulWidget's `initState` method, create an instance of `QuestionViewModel`, optionally passing your custom list of questions.
+
+```dart
 import 'package:flutter/material.dart';
 import 'package:q_and_a_widget/q_and_a_widget.dart';
 
@@ -88,10 +99,13 @@ class _MyQuizPageState extends State<MyQuizPage> {
     );
   }
 }
+```
 
-3. Display the Widgets
-Use the QuestionWidget within your Flutter UI, passing the QuestionChoices object and the handleChoiceSelected callback from your ViewModel.
+### 3. Display the Widgets
 
+Use the `QuestionWidget` within your Flutter UI, passing the `QuestionChoices` object and the `handleChoiceSelected` callback from your ViewModel.
+
+```dart
 // Inside your build method, after initializing _viewModel:
 
 Column(
@@ -110,26 +124,35 @@ Column(
     }).toList(),
   ],
 )
+```
 
-Preview
+### Preview
+
 Here's how the Q&A Widget looks in action:
-![Q&A Widget Preview](image.png)
 
-JSON Output Format
-When a user selects an answer, the handleChoiceSelected method in QuestionViewModel will print a JSON object to the debug console (e.g., in VS Code's Debug Console or your terminal where flutter run is executing).
+![Q&A Widget Example](example\image.png)
+*(Please upload the `image_5e407b.png` screenshot to your GitHub repository, for example, in an `images/` folder, and update the path above if necessary.)*
+
+## JSON Output Format
+
+When a user selects an answer, the `handleChoiceSelected` method in `QuestionViewModel` will print a JSON object to the debug console (e.g., in VS Code's Debug Console or your terminal where `flutter run` is executing).
 
 Example JSON output for a single selection:
 
+```json
 {
   "question_id": "c1",
   "question_text": "What is the largest animal on Earth?",
   "selected_answer": "Blue Whale"
 }
+```
 
 This output is designed to be easily parsed and stored in a database.
 
-Contributing
-Contributions are welcome! Please feel free to open an issue or submit a pull request on the GitHub repository.
+## Contributing
 
-License
-This package is distributed under the MIT License. See the LICENSE file for more details.
+Contributions are welcome! Please feel free to open an issue or submit a pull request on the [GitHub repository](https://www.google.com/search?q=https://github.com/your_username/q_and_a_widget).
+
+## License
+
+This package is distributed under the [MIT License](https://www.google.com/search?q=LICENSE).
