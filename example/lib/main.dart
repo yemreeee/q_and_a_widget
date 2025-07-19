@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // Import your package here.
 import 'package:q_and_a_widget/q_and_a_widget.dart';
+import 'dart:convert'; // Required for JsonEncoder
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +46,30 @@ class _MyAppState extends State<MyApp> {
     _viewModel = QuestionViewModel(questions: _myCustomQuestions);
   }
 
+  // Local method to handle choice selection and print JSON output.
+  void _handleChoiceSelected(
+      String questionId, String questionText, String selectedChoice) {
+    // Call the ViewModel's method, which returns the list of selected answers.
+    List<Map<String, String>> allSelectedAnswersJson =
+        _viewModel.handleChoiceSelected(
+      questionId,
+      questionText,
+      selectedChoice,
+    );
+
+    // Encode the list to a pretty-printed JSON string.
+    String jsonOutput =
+        const JsonEncoder.withIndent('  ').convert(allSelectedAnswersJson);
+
+    // Print the JSON output to the debug console.
+    debugPrint('JSON Output (All Selected Answers): $jsonOutput');
+
+    // You can now use 'allSelectedAnswersJson' here to send it to a web service,
+    // update UI based on all answers, etc.
+    // Example:
+    // myWebService.sendData(jsonOutput);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,8 +95,8 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       QuestionWidget(
                         questionData: questionData,
-                        // Pass the selected choice event from QuestionWidget to the ViewModel.
-                        onChoiceSelected: _viewModel.handleChoiceSelected,
+                        // Pass the local _handleChoiceSelected method as the callback.
+                        onChoiceSelected: _handleChoiceSelected,
                       ),
                       const SizedBox(height: 30), // Space between widgets
                     ],

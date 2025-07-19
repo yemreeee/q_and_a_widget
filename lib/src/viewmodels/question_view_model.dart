@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart'; // debugPrint is required for this class.
 import 'package:q_and_a_widget/src/models/question_choices.dart'; // Import the Model class.
 
 // QuestionViewModel class manages the logic and data for the View.
@@ -47,7 +45,7 @@ class QuestionViewModel {
 
   // Method called when an option is selected.
   // It processes the selected answer and prints the JSON output to the debug console.
-  void handleChoiceSelected(
+  List<Map<String, String>> handleChoiceSelected(
       String questionId, String questionText, String selectedChoice) {
     // Update the map with the latest selected answer for the given question ID.
     _allSelectedAnswers[questionId] = selectedChoice;
@@ -63,12 +61,6 @@ class QuestionViewModel {
               'selected_answer': entry.value,
             })
         .toList();
-
-    // Encode the list to a pretty-printed JSON string.
-    String jsonOutput =
-        const JsonEncoder.withIndent('  ').convert(jsonOutputList);
-
-    // Print the JSON output to the debug console.
-    debugPrint('JSON Output (All Selected Answers): $jsonOutput');
+    return jsonOutputList;
   }
 }

@@ -8,7 +8,7 @@ class QuestionWidget extends StatefulWidget {
   // Callback function to be called when a choice is selected.
   // It passes the question ID, question text, and the selected choice.
   final Function(String questionId, String questionText, String selectedChoice)?
-  onChoiceSelected;
+      onChoiceSelected;
 
   // Constructor for QuestionWidget. It takes a QuestionChoices object and an optional callback.
   const QuestionWidget({
