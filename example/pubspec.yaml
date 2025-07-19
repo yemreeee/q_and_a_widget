@@ -1,0 +1,19 @@
+name: q_and_a_widget_example
+description: Demonstrates how to use the q_and_a_widget package.
+# The following line ensures that the example app uses the latest version of the package.
+# If you make changes to the package, run 'flutter pub get' in the root of the package.
+publish_to: 'none' # Do not publish this package to pub.dev
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  q_and_a_widget: # This is the name of your package
+    path: ../ # This path tells the example app where to find your package
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0 # Add flutter_lints here to resolve the warning
