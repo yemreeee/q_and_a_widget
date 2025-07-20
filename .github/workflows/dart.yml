@@ -43,7 +43,7 @@ jobs:
       # Using 'flutter format' is more common for Flutter projects
       # instead of 'dart format'.
       - name: Verify formatting
-        run: flutter format --output=none --set-exit-if-changed .
+        run: dart format --output=none --set-exit-if-changed .
 
       # Using 'flutter analyze' is more common for Flutter projects
       # instead of 'dart analyze'.
