@@ -1,45 +1,85 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+# Generic Flutter files
+.dart_tool/
+.flutter-plugins-dependencies
+.flutter-plugins
+.packages
+.idea/ # IntelliJ/Android Studio project files
+.vscode/ # VS Code project files
+build/ # Flutter build output directory
+.cxx/ # C/C++ build output (for platform-specific builds)
+*.iml # IntelliJ module files
+*.lock # Pub lock file (usually kept for apps, but often ignored for packages)
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Dart specific files
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
-.pub/
-/build/
 
-# Symbolication related
-app.*.symbols
+# Android specific
+android/build/
+android/.gradle/
+android/local.properties
+android/*.iml
+android/gradle/wrapper/gradle-wrapper.jar
+android/key.properties
+android/app/src/debug/
+android/app/src/profile/
+android/app/build/
+android/app/.cxx/
+android/app/*.iml
 
-# Obfuscation related
-app.*.map.json
+# iOS specific
+ios/Flutter/.last_build_id
+ios/.symlinks/
+ios/Pods/
+ios/.ios-plugins
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Flutter.xcodeproj/project.pbxproj
+ios/Flutter/Flutter.podspec
+ios/Runner/*.xcodeproj/project.pbxproj
+ios/Runner/*.xcworkspace/contents.xcworkspacedata
+ios/Runner/*.xcworkspace/xcuserdata/
+ios/Runner/*.xcworkspace/xcshareddata/
+ios/Runner/*.xcodeproj/xcuserdata/
+ios/Runner/*.xcodeproj/xcshareddata/
+ios/Runner/Generated.xcconfig
+ios/Runner.xcodeproj/project.pbxproj
+ios/Runner.xcworkspace/contents.xcworkspacedata
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcworkspace/xcshareddata/
+ios/Runner.xcodeproj/xcuserdata/
+ios/Runner.xcodeproj/xcshareddata/
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Windows specific
+windows/build/
+windows/CMakeLists.txt.user
+windows/*.vcxproj.user
+
+# Web specific
+web/
+.firebase/
+
+# macOS specific
+macos/build/
+macos/Flutter/ephemeral/
+macos/Runner.xcodeproj/project.pbxproj
+macos/Runner.xcodeproj/xcshareddata/
+macos/Runner.xcodeproj/xcuserdata/
+macos/Runner.xcworkspace/contents.xcworkspacedata
+macos/Runner.xcworkspace/xcuserdata/
+macos/Runner.xcworkspace/xcshareddata/
+
+# Linux specific
+linux/build/
+
+# Visual Studio Code specific (if not already covered by .vscode/)
+.vscode/launch.json
+.vscode/tasks.json
+
+# Other common ignored files
+*.log
+*.DS_Store
+Thumbs.db
