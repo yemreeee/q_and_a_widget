@@ -18,10 +18,10 @@ class QuestionWidget extends StatefulWidget {
   /// [onChoiceSelected] is an optional callback to notify the parent
   /// (typically the ViewModel or another View) about the user's selection.
   const QuestionWidget({
-    Key? key,
+    super.key,
     required this.questionData,
     this.onChoiceSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
@@ -89,7 +89,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 controlAffinity: ListTileControlAffinity
                     .leading, // Places the radio button icon at the start of the tile.
               );
-            }).toList(), // Converts the iterable of widgets to a List<Widget>.
+            }), // Converts the iterable of widgets to a List<Widget>.
             // The "Selected Choice" text display is intentionally removed as per previous requirements.
           ],
         ),
