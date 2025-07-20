@@ -1,18 +1,26 @@
-// This class is used to hold a question, its unique ID, and multiple-choice options.
-// It also provides methods for converting to and from JSON format.
+/// A model class representing a single question with its unique identifier and multiple-choice options.
+/// This class handles the data structure and provides methods for JSON serialization/deserialization.
 class QuestionChoices {
-  // Unique identifier for the question.
-  final String id; // Made final
-  // Property to store the question.
-  final String question; // Made final
-  // Property to store multiple-choice options.
-  final List<String> choices; // Made final
+  /// A unique identifier for the question. Useful for database operations or tracking.
+  final String id;
 
-  // Const constructor for the QuestionChoices class.
-  // It creates a new instance by taking an id, question, and a list of choices.
-  const QuestionChoices(this.id, this.question, this.choices); // Made const
+  /// The text content of the question.
+  final String question;
 
-  // Converts a QuestionChoices object into a Map<String, dynamic> (JSON-compatible format).
+  /// A list of strings representing the multiple-choice options for the question.
+  final List<String> choices;
+
+  /// Creates a [QuestionChoices] instance.
+  ///
+  /// All parameters are required and immutable. The `const` constructor
+  /// allows for compile-time constants, which can improve performance
+  /// when creating fixed lists of questions.
+  const QuestionChoices(this.id, this.question, this.choices);
+
+  /// Converts a [QuestionChoices] object into a [Map<String, dynamic>]
+  /// that is compatible with JSON serialization.
+  ///
+  /// Returns a map containing the question's ID, question text, and choices.
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -21,7 +29,14 @@ class QuestionChoices {
     };
   }
 
-  // Creates a QuestionChoices object from a Map<String, dynamic> (parsed from JSON).
+  /// Creates a [QuestionChoices] object from a [Map<String, dynamic>].
+  ///
+  /// This factory constructor is typically used when deserializing JSON data
+  /// back into a [QuestionChoices] object.
+  ///
+  /// [json]: A map parsed from a JSON string, expected to contain 'id',
+  /// 'question', and 'choices' keys.
+  /// Returns a new [QuestionChoices] instance.
   factory QuestionChoices.fromJson(Map<String, dynamic> json) {
     return QuestionChoices(
       json['id'] as String,

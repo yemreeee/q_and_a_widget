@@ -1,17 +1,19 @@
-name: q_and_a_widget # Name of the package
-description: A Flutter package for displaying questions with radio button choices, following MVVM architecture.
-version: 0.0.1 # Initial version number of the package
-homepage: https://github.com/yemreeee/q_and_a_widget # Homepage URL for the package
+name: q_and_a_widget # The unique name of the package on pub.dev.
+description: A Flutter package for displaying questions with radio button choices, following MVVM architecture. # A brief description of the package's functionality.
+version: 0.0.1 # The current version number of the package. Increment this for new releases.
+homepage: https://github.com/yemreeee/q_and_a_widget # The URL to the package's repository or documentation.
 
 environment:
-  sdk: '>=3.0.0 <4.0.0' # Supported Dart SDK range
-  flutter: ">=1.17.0" # Supported Flutter SDK range
+  sdk: '>=3.0.0 <4.0.0' # The Dart SDK version range supported by this package.
+  flutter: ">=1.17.0" # The Flutter SDK version range supported by this package.
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutter # Declares Flutter SDK as a dependency, essential for Flutter packages.
+  # dart:convert is a built-in Dart library for JSON operations,
+  # so it does not need to be explicitly listed here.
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0 # Recommended lint rules for code quality
+    sdk: flutter # Dependency for writing Flutter unit and widget tests.
+  flutter_lints: ^2.0.0 # Provides a set of recommended lint rules for consistent code style and quality.

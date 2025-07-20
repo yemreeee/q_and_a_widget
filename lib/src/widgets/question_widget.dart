@@ -1,76 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:q_and_a_widget/src/models/question_choices.dart'; // Import the Model class.
+import 'package:q_and_a_widget/src/models/question_choices.dart'; // Imports the Model class for data structure.
 
-// This widget displays a question and its choices as radio buttons,
-// using a QuestionChoices object.
+/// A Flutter widget that displays a single question with its multiple-choice
+/// options as radio buttons. It's a reusable UI component.
 class QuestionWidget extends StatefulWidget {
+  /// The data model containing the question text, ID, and choices.
   final QuestionChoices questionData;
-  // Callback function to be called when a choice is selected.
-  // It passes the question ID, question text, and the selected choice.
+
+  /// A callback function that is invoked when a user selects a radio button.
+  /// It provides the question's ID, its text, and the selected choice.
   final Function(String questionId, String questionText, String selectedChoice)?
       onChoiceSelected;
 
-  // Constructor for QuestionWidget. It takes a QuestionChoices object and an optional callback.
+  /// Creates a [QuestionWidget].
+  ///
+  /// [questionData] is required and provides the content for the widget.
+  /// [onChoiceSelected] is an optional callback to notify the parent
+  /// (typically the ViewModel or another View) about the user's selection.
   const QuestionWidget({
-    super.key,
+    Key? key,
     required this.questionData,
     this.onChoiceSelected,
-  });
+  }) : super(key: key);
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
 }
 
+/// The mutable state for the [QuestionWidget].
 class _QuestionWidgetState extends State<QuestionWidget> {
-  // Variable to hold the selected choice. Initially null.
+  /// Stores the currently selected choice for this specific question.
+  /// It's nullable, indicating no choice has been made yet.
   String? _selectedChoice;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(16.0),
-      elevation: 8.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      margin: const EdgeInsets.all(16.0), // Provides spacing around the card.
+      elevation: 8.0, // Adds a shadow effect to the card.
+      shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(15.0)), // Rounds the card corners.
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(
+            20.0), // Internal padding for the card content.
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // Aligns content to the start (left).
           children: [
-            // Text displaying the question.
+            // Displays the question text.
             Text(
               widget.questionData.question,
               style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepPurple,
+                color: Colors.deepPurple, // Custom text color for the question.
               ),
             ),
-            const SizedBox(height: 15.0), // Adds vertical space
-            // Lists the choices as radio buttons.
+            const SizedBox(
+                height:
+                    15.0), // Adds vertical space between the question and choices.
+            // Dynamically generates a list of RadioListTile widgets for each choice.
             ...widget.questionData.choices.map<Widget>((choice) {
               return RadioListTile<String>(
-                title: Text(choice, style: const TextStyle(fontSize: 16.0)),
-                value: choice,
-                groupValue: _selectedChoice,
+                title: Text(
+                  choice,
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                value: choice, // The value associated with this radio button.
+                groupValue:
+                    _selectedChoice, // The currently selected value in this group.
                 onChanged: (String? value) {
                   setState(() {
-                    _selectedChoice = value; // Updates the selected choice.
+                    _selectedChoice =
+                        value; // Updates the selected choice, triggering a UI rebuild.
                   });
-                  // Call the callback function if it's provided.
+                  // Invokes the provided callback function if it's not null and a value is selected.
                   if (widget.onChoiceSelected != null && value != null) {
                     widget.onChoiceSelected!(
-                      widget.questionData.id, // Pass the question ID.
-                      widget.questionData.question, // Pass the question text.
-                      value,
+                      widget.questionData.id, // Passes the question ID.
+                      widget.questionData.question, // Passes the question text.
+                      value, // Passes the newly selected choice.
                     );
                   }
                 },
-                activeColor: Colors.deepPurpleAccent,
+                activeColor: Colors
+                    .deepPurpleAccent, // Color of the radio button when selected.
                 controlAffinity: ListTileControlAffinity
-                    .leading, // Places the radio button at the start.
+                    .leading, // Places the radio button icon at the start of the tile.
               );
-            }),
-            // The "Selected Choice" text display is removed as per the requirement.
+            }).toList(), // Converts the iterable of widgets to a List<Widget>.
+            // The "Selected Choice" text display is intentionally removed as per previous requirements.
           ],
         ),
       ),
