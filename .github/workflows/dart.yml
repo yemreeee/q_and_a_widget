@@ -30,6 +30,11 @@ jobs:
           flutter-version: '3.32.7' # Example version, replace with your actual version
           channel: 'stable' # 'stable' is commonly used
 
+      # Added this step to diagnose the Flutter environment.
+      # The output will help us understand why 'format' command is not found.
+      - name: Diagnose Flutter environment
+        run: flutter doctor -v
+
       - name: Install dependencies
         # 'flutter' command will now be available
         run: flutter pub get
