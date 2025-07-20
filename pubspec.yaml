@@ -16,4 +16,4 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter # Dependency for writing Flutter unit and widget tests.
-  flutter_lints: ^6.0.0 # Provides a set of recommended lint rules for consistent code style and quality.
+  flutter_lints: ^2.0.0 # Provides a set of recommended lint rules for consistent code style and quality.
