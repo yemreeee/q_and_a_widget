@@ -28,7 +28,7 @@ jobs:
           # Specify the Flutter version your project uses here.
           # Changed to a more current stable version '3.22.0'.
           # You can also use 'stable' to always get the latest stable version.
-          flutter-version: '3.22.0' # Changed to a more realistic stable version
+          flutter-version: '3.32.7' # Changed to a more realistic stable version
           channel: 'stable' # 'stable' is commonly used
 
       # Added this step to diagnose the Flutter environment.
