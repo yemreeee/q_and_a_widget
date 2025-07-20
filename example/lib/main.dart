@@ -7,17 +7,34 @@ void main() {
   runApp(const MyApp());
 }
 
-// The MyApp class creates the ViewModel and manages the Views.
-class MyApp extends StatefulWidget {
+/// The root widget of the application.
+/// It sets up the [MaterialApp] and defines the home page.
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Questions and Radio Buttons',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const QAPage(), // The home page is now a separate widget.
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  // Define a custom list of questions and choices.
-  // This list will be passed to the ViewModel.
+/// A StatefulWidget that represents the main page of the Q&A application.
+/// It manages the state, including the questions, answers, and ViewModel.
+class QAPage extends StatefulWidget {
+  const QAPage({super.key});
+
+  @override
+  State<QAPage> createState() => _QAPageState();
+}
+
+class _QAPageState extends State<QAPage> {
   final List<QuestionChoices> _myCustomQuestions = const [
     QuestionChoices(
       'c1', // Custom unique ID for the question
@@ -34,35 +51,107 @@ class _MyAppState extends State<MyApp> {
       'How many continents are there?',
       ['5', '6', '7', '8'],
     ),
+    QuestionChoices(
+      'c4',
+      'Which country is known as the Land of the Rising Sun?',
+      ['China', 'South Korea', 'Japan', 'Thailand'],
+    ),
+    QuestionChoices(
+      'c5',
+      'What is the chemical symbol for gold?',
+      ['Ag', 'Au', 'G', 'Go'],
+    ),
+    QuestionChoices(
+      'c6',
+      'Who wrote "Romeo and Juliet"?',
+      ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
+    ),
+    QuestionChoices(
+      'c7',
+      'What is the smallest prime number?',
+      ['0', '1', '2', '3'],
+    ),
+    QuestionChoices(
+      'c8',
+      'In which year did the Titanic sink?',
+      ['1905', '1912', '1918', '1923'],
+    ),
+    QuestionChoices(
+      'c9',
+      'What is the main ingredient in guacamole?',
+      ['Tomato', 'Onion', 'Avocado', 'Cilantro'],
+    ),
+    QuestionChoices(
+      'c10',
+      'Which artist painted the Mona Lisa?',
+      [
+        'Vincent van Gogh',
+        'Pablo Picasso',
+        'Claude Monet',
+        'Leonardo da Vinci'
+      ],
+    ),
   ];
 
   // Declare _viewModel as 'late final' because it will be initialized in initState.
   late final QuestionViewModel _viewModel;
 
+  // A state variable to hold the list of all selected answers.
+  List<Map<String, String>> _allSelectedAnswers = [];
+
   @override
   void initState() {
     super.initState();
-    // Initialize _viewModel here, after _myCustomQuestions has been initialized.
     _viewModel = QuestionViewModel(questions: _myCustomQuestions);
+  }
+
+  // A method to display the selected answers in a dialog.
+  void _showSelectedAnswersDialog() {
+    showDialog(
+      context: context,
+      // The context used here is now from _QAPageState, which is a descendant
+      // of MaterialApp, thus resolving the 'No MaterialLocalizations found' error.
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Selected Answers (JSON)'),
+          content: SingleChildScrollView(
+            // Use SingleChildScrollView in case the JSON is long
+            child: Text(_allSelectedAnswers.isEmpty
+                ? 'No answer has been selected yet.'
+                : const JsonEncoder.withIndent('  ')
+                    .convert(_allSelectedAnswers)),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   // Local method to handle choice selection and print JSON output.
   void _handleChoiceSelected(
       String questionId, String questionText, String selectedChoice) {
     // Call the ViewModel's method, which returns the list of selected answers.
-    List<Map<String, String>> allSelectedAnswersJson =
-        _viewModel.handleChoiceSelected(
+    final allSelectedAnswers = _viewModel.handleChoiceSelected(
       questionId,
       questionText,
       selectedChoice,
     );
 
-    // Encode the list to a pretty-printed JSON string.
-    String jsonOutput =
-        const JsonEncoder.withIndent('  ').convert(allSelectedAnswersJson);
+    // Update the state with the new list of answers.
+    setState(() {
+      _allSelectedAnswers = allSelectedAnswers;
+    });
 
-    // Print the JSON output to the debug console.
-    debugPrint('JSON Output (All Selected Answers): $jsonOutput');
+    // For demonstration, also print the JSON to the console.
+    debugPrint(
+        'JSON Output (All Selected Answers): ${const JsonEncoder.withIndent('  ').convert(allSelectedAnswers)}');
 
     // You can now use 'allSelectedAnswersJson' here to send it to a web service,
     // update UI based on all answers, etc.
@@ -72,40 +161,38 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Questions and Radio Buttons',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Q&A Widget Example'),
+        centerTitle: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Q&A Widget Example'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Loop through the list of questions from the ViewModel
-                // and create a QuestionWidget for each question.
-                ..._viewModel.questions.map<Widget>((questionData) {
-                  return Column(
-                    children: [
-                      QuestionWidget(
-                        questionData: questionData,
-                        // Pass the local _handleChoiceSelected method as the callback.
-                        onChoiceSelected: _handleChoiceSelected,
-                      ),
-                      const SizedBox(height: 30), // Space between widgets
-                    ],
-                  );
-                }).toList(),
-              ],
-            ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Loop through the list of questions from the ViewModel
+              // and create a QuestionWidget for each question.
+              ..._viewModel.questions.map<Widget>((questionData) {
+                return Column(
+                  children: [
+                    QuestionWidget(
+                      questionData: questionData,
+                      // Pass the local _handleChoiceSelected method as the callback.
+                      onChoiceSelected: _handleChoiceSelected,
+                    ),
+                    const SizedBox(height: 30), // Space between widgets
+                  ],
+                );
+              }).toList(),
+            ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showSelectedAnswersDialog,
+        tooltip: 'Show JSON Output',
+        child: const Icon(Icons.data_object),
       ),
     );
   }
