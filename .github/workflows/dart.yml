@@ -3,40 +3,68 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Flutter CI # Workflow name made more descriptive
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ] # Added master branch
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "master" ] # Added master branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Can also use macOS or Windows
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Note: This workflow uses the latest stable version of the Dart SDK.
-      # You can specify other versions if desired, see documentation here:
-      # https://github.com/dart-lang/setup-dart/blob/main/README.md
-      # - uses: dart-lang/setup-dart@v1
-      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      # IMPORTANT: Replaced dart-lang/setup-dart action
+      # with subosito/flutter-action.
+      # This will install both Flutter SDK and Dart SDK.
+      - name: Set up Flutter SDK # Step name made more descriptive
+        uses: subosito/flutter-action@v2 # Using this action
+        with:
+          # Specify the Flutter version your project uses here.
+          # You can also use 'stable' for the latest stable version.
+          flutter-version: '3.32.7' # Example version, replace with your actual version
+          channel: 'stable' # 'stable' is commonly used
 
       - name: Install dependencies
+        # 'flutter' command will now be available
         run: flutter pub get
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
+      # Using 'flutter format' is more common for Flutter projects
+      # instead of 'dart format'.
+      - name: Verify formatting
+        run: flutter format --output=none --set-exit-if-changed .
 
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      # Using 'flutter analyze' is more common for Flutter projects
+      # instead of 'dart analyze'.
+      # Adding '--fatal-infos' treats info-level warnings as errors.
       - name: Analyze project source
-        run: dart analyze
+        run: flutter analyze --fatal-infos # Use flutter analyze for Flutter projects
 
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
+      # For Flutter projects, 'flutter test' is used to run tests.
       - name: Run tests
-        run: dart test
+        run: flutter test # Use flutter test for Flutter projects
+
+      # Optional: Steps to build the example app (if it exists)
+      # This ensures your library's example app runs smoothly.
+      # You can remove these steps if you don't have an 'example' folder.
+      - name: Build example app (Android)
+        if: success() && contains(github.workspace, 'example')
+        run: |
+          cd example
+          flutter build apk --debug
+
+      - name: Build example app (Web)
+        if: success() && contains(github.workspace, 'example')
+        run: |
+          cd example
+          flutter build web
+
+      # Optional: Pre-publish check (before uploading to pub.dev)
+      # NOTE: 'flutter pub publish --dry-run' is used instead of 'dart pub publish --dry-run'.
+      - name: Check for publish warnings (Optional)
+        run: flutter pub publish --dry-run # Use flutter pub publish for Flutter projects
