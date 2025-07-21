@@ -1,6 +1,6 @@
 # Q&A Widget
 
-<img src="https://github.com/yemreeee/q_and_a_widget/blob/main/example/header.png?raw=true" alt="Q&A Widget Header" width="600"/>
+![Q&A Widget Header](https://github.com/yemreeee/q_and_a_widget/blob/main/example/header_(Medium).png?raw=true)
 
 A Flutter package for displaying questions with multiple-choice radio button options, designed with the MVVM (Model-View-ViewModel) architecture in mind. This package provides a reusable `QuestionWidget` and a `QuestionViewModel` to manage your question data and user selections, making your UI logic clean and testable.
 
