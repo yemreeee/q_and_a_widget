@@ -1,6 +1,6 @@
 name: q_and_a_widget # The unique name of the package on pub.dev.
 description: A Flutter package for displaying questions with radio button choices, following MVVM architecture. # A brief description of the package's functionality.
-version: 0.0.2 # The current version number of the package. Increment this for new releases.
+version: 0.0.3 # The current version number of the package. Increment this for new releases.
 homepage: https://github.com/yemreeee/q_and_a_widget # The URL to the package's repository or documentation.
 
 environment:
