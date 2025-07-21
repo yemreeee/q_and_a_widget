@@ -132,7 +132,7 @@ Column(
 
 Here's how the Q&A Widget looks in action:
 
-![Q&A Widget Example](https://github.com/yemreeee/q_and_a_widget/blob/main/example/image.png)
+![Q&A Widget Example](https://github.com/yemreeee/q_and_a_widget/blob/main/example/image.png?raw=true)
 
 ## JSON Output Format
 
