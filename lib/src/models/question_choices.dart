@@ -15,7 +15,11 @@ class QuestionChoices {
   /// All parameters are required and immutable. The `const` constructor
   /// allows for compile-time constants, which can improve performance
   /// when creating fixed lists of questions.
-  const QuestionChoices(this.id, this.question, this.choices);
+  const QuestionChoices({
+    required this.id,
+    required this.question,
+    required this.choices,
+  });
 
   /// Converts a [QuestionChoices] object into a [Map<String, dynamic>]
   /// that is compatible with JSON serialization.
@@ -39,9 +43,9 @@ class QuestionChoices {
   /// Returns a new [QuestionChoices] instance.
   factory QuestionChoices.fromJson(Map<String, dynamic> json) {
     return QuestionChoices(
-      json['id'] as String,
-      json['question'] as String,
-      List<String>.from(json['choices'] as List<dynamic>),
+      id: json['id'] as String,
+      question: json['question'] as String,
+      choices: List<String>.from(json['choices'] as List<dynamic>),
     );
   }
 }

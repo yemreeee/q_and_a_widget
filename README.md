@@ -36,14 +36,14 @@ import 'package:q_and_a_widget/q_and_a_widget.dart';
 
 final List<QuestionChoices> myQuestions = const [
   QuestionChoices(
-    'q1', // Unique ID for the question
-    'What is the capital of France?',
-    ['Berlin', 'Madrid', 'Paris', 'Rome'],
+    id: 'q1', // Unique ID for the question
+    question: 'What is the capital of France?',
+    choices: ['Berlin', 'Madrid', 'Paris', 'Rome'],
   ),
   QuestionChoices(
-    'q2', // Unique ID for the question
-    'Which planet is closest to the Sun?',
-    ['Earth', 'Mars', 'Mercury', 'Venus'],
+    id: 'q2', // Unique ID for the question
+    question: 'Which planet is closest to the Sun?',
+    choices: ['Earth', 'Mars', 'Mercury', 'Venus'],
   ),
   // Add more questions as needed
 ];
@@ -66,8 +66,8 @@ class MyQuizPage extends StatefulWidget {
 
 class _MyQuizPageState extends State<MyQuizPage> {
   final List<QuestionChoices> _myCustomQuestions = const [
-    QuestionChoices('c1', 'What is the largest animal on Earth?', ['Elephant', 'Blue Whale', 'Giraffe', 'Great White Shark']),
-    QuestionChoices('c2', 'Which gas do plants absorb from the atmosphere?', ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen']),
+    QuestionChoices(id: 'c1', question: 'What is the largest animal on Earth?', choices: ['Elephant', 'Blue Whale', 'Giraffe', 'Great White Shark']),
+    QuestionChoices(id: 'c2', question: 'Which gas do plants absorb from the atmosphere?', choices:['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen']),
   ];
 
   late final QuestionViewModel _viewModel;

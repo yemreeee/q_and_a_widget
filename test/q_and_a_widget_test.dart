@@ -12,7 +12,7 @@ void main() {
       const id = 'q_test_1';
 
       // Instantiate the QuestionChoices object using its const constructor.
-      const qc = QuestionChoices(id, question, choices);
+      const qc = QuestionChoices(id: id, question: question, choices: choices);
 
       // Assert that the properties of the instantiated object match the input data.
       expect(qc.id, id);
@@ -26,7 +26,7 @@ void main() {
       const choices = ['Option A', 'Option B'];
       const id = 'q_test_2';
 
-      const qc = QuestionChoices(id, question, choices);
+      const qc = QuestionChoices(id: id, question: question, choices: choices);
       final jsonMap = qc.toJson(); // Call the toJson method.
 
       // Assert that the keys and values in the generated map are correct.
@@ -73,8 +73,10 @@ void main() {
     test('ViewModel loads custom questions when provided', () {
       // Define a list of custom questions.
       const customQuestions = [
-        QuestionChoices('custom1', 'Custom Q1', ['C1 A', 'C1 B']),
-        QuestionChoices('custom2', 'Custom Q2', ['C2 A', 'C2 B']),
+        QuestionChoices(
+            id: 'custom1', question: 'Custom Q1', choices: ['C1 A', 'C1 B']),
+        QuestionChoices(
+            id: 'custom2', question: 'Custom Q2', choices: ['C2 A', 'C2 B']),
       ];
       final viewModel = QuestionViewModel(
           questions: customQuestions); // Instantiate with custom questions.

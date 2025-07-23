@@ -9,24 +9,29 @@ class QuestionViewModel {
   /// Used if no custom questions are provided during ViewModel initialization.
   final List<QuestionChoices> _dummyQuestions = const [
     QuestionChoices(
-      'q1',
-      'What is the capital of Turkey?',
-      ['Istanbul', 'İzmir', 'Ankara', 'Bursa'],
+      id: 'q1',
+      question: 'What is the capital of Turkey?',
+      choices: ['Istanbul', 'İzmir', 'Ankara', 'Bursa'],
     ),
     QuestionChoices(
-      'q2',
-      'What is the highest mountain in the world?',
-      ['K2', 'Mount Everest', 'Kangchenjunga', 'Lhotse'],
+      id: 'q2',
+      question: 'What is the highest mountain in the world?',
+      choices: ['K2', 'Mount Everest', 'Kangchenjunga', 'Lhotse'],
     ),
     QuestionChoices(
-      'q3',
-      'Which planet is known as the Red Planet?',
-      ['Earth', 'Mars', 'Jupiter', 'Venus'],
+      id: 'q3',
+      question: 'Which planet is known as the Red Planet?',
+      choices: ['Earth', 'Mars', 'Jupiter', 'Venus'],
     ),
     QuestionChoices(
-      'q4',
-      'What is the largest ocean on Earth?',
-      ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+      id: 'q4',
+      question: 'What is the largest ocean on Earth?',
+      choices: [
+        'Atlantic Ocean',
+        'Indian Ocean',
+        'Arctic Ocean',
+        'Pacific Ocean'
+      ],
     ),
   ];
 

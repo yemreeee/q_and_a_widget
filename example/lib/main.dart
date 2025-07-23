@@ -37,54 +37,59 @@ class QAPage extends StatefulWidget {
 class _QAPageState extends State<QAPage> {
   final List<QuestionChoices> _myCustomQuestions = const [
     QuestionChoices(
-      'c1', // Custom unique ID for the question
-      'What is the largest animal on Earth?',
-      ['Elephant', 'Blue Whale', 'Giraffe', 'Great White Shark'],
+      id: 'c1', // Custom unique ID for the question
+      question: 'What is the largest animal on Earth?',
+      choices: ['Elephant', 'Blue Whale', 'Giraffe', 'Great White Shark'],
     ),
     QuestionChoices(
-      'c2', // Custom unique ID for the question
-      'Which gas do plants absorb from the atmosphere?',
-      ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen'],
+      id: 'c2', // Custom unique ID for the question
+      question: 'Which gas do plants absorb from the atmosphere?',
+      choices: ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Hydrogen'],
     ),
     QuestionChoices(
-      'c3', // Custom unique ID for the question
-      'How many continents are there?',
-      ['5', '6', '7', '8'],
+      id: 'c3', // Custom unique ID for the question
+      question: 'How many continents are there?',
+      choices: ['5', '6', '7', '8'],
     ),
     QuestionChoices(
-      'c4',
-      'Which country is known as the Land of the Rising Sun?',
-      ['China', 'South Korea', 'Japan', 'Thailand'],
+      id: 'c4',
+      question: 'Which country is known as the Land of the Rising Sun?',
+      choices: ['China', 'South Korea', 'Japan', 'Thailand'],
     ),
     QuestionChoices(
-      'c5',
-      'What is the chemical symbol for gold?',
-      ['Ag', 'Au', 'G', 'Go'],
+      id: 'c5',
+      question: 'What is the chemical symbol for gold?',
+      choices: ['Ag', 'Au', 'G', 'Go'],
     ),
     QuestionChoices(
-      'c6',
-      'Who wrote "Romeo and Juliet"?',
-      ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
+      id: 'c6',
+      question: 'Who wrote "Romeo and Juliet"?',
+      choices: [
+        'Charles Dickens',
+        'William Shakespeare',
+        'Jane Austen',
+        'Mark Twain'
+      ],
     ),
     QuestionChoices(
-      'c7',
-      'What is the smallest prime number?',
-      ['0', '1', '2', '3'],
+      id: 'c7',
+      question: 'What is the smallest prime number?',
+      choices: ['0', '1', '2', '3'],
     ),
     QuestionChoices(
-      'c8',
-      'In which year did the Titanic sink?',
-      ['1905', '1912', '1918', '1923'],
+      id: 'c8',
+      question: 'In which year did the Titanic sink?',
+      choices: ['1905', '1912', '1918', '1923'],
     ),
     QuestionChoices(
-      'c9',
-      'What is the main ingredient in guacamole?',
-      ['Tomato', 'Onion', 'Avocado', 'Cilantro'],
+      id: 'c9',
+      question: 'What is the main ingredient in guacamole?',
+      choices: ['Tomato', 'Onion', 'Avocado', 'Cilantro'],
     ),
     QuestionChoices(
-      'c10',
-      'Which artist painted the Mona Lisa?',
-      [
+      id: 'c10',
+      question: 'Which artist painted the Mona Lisa?',
+      choices: [
         'Vincent van Gogh',
         'Pablo Picasso',
         'Claude Monet',

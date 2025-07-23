@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Updated library version.
+
+## 0.0.4
+
+* Refactor: Use named parameters for QuestionChoices constructor
