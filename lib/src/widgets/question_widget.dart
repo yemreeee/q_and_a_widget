@@ -79,7 +79,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     );
                   }
                 },
-                child: RadioListTile(
+                child: RadioListTile<String>(
                   title: Text(
                     choice,
                     style: const TextStyle(fontSize: 16.0),
