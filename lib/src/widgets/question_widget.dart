@@ -62,12 +62,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     15.0), // Adds vertical space between the question and choices.
             // Dynamically generates a list of RadioListTile widgets for each choice.
             ...widget.questionData.choices.map<Widget>((choice) {
-              return RadioListTile<String>(
-                title: Text(
-                  choice,
-                  style: const TextStyle(fontSize: 16.0),
-                ),
-                value: choice, // The value associated with this radio button.
+              return RadioGroup<String>(
                 groupValue:
                     _selectedChoice, // The currently selected value in this group.
                 onChanged: (String? value) {
@@ -84,10 +79,18 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     );
                   }
                 },
-                activeColor: Colors
-                    .deepPurpleAccent, // Color of the radio button when selected.
-                controlAffinity: ListTileControlAffinity
-                    .leading, // Places the radio button icon at the start of the tile.
+                child: RadioListTile(
+                  title: Text(
+                    choice,
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                  value: choice, // The value associated with this radio button.
+
+                  activeColor: Colors
+                      .deepPurpleAccent, // Color of the radio button when selected.
+                  controlAffinity: ListTileControlAffinity
+                      .leading, // Places the radio button icon at the start of the tile.
+                ),
               );
             }), // Converts the iterable of widgets to a List<Widget>.
             // The "Selected Choice" text display is intentionally removed as per previous requirements.
