@@ -19,6 +19,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # setup java
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for options
+          java-version: '17'
+
       # IMPORTANT: Replaced dart-lang/setup-dart action
       # with subosito/flutter-action.
       # This will install both Flutter SDK and Dart SDK.
